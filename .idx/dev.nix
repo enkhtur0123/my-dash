@@ -9,6 +9,8 @@
     pkgs.yarn
     pkgs.nodePackages.pnpm
     pkgs.bun
+    pkgs.sudo
+    pkgs.libressl_3_6.bin
   ];
   # Sets environment variables in the workspace
   env = {};
