@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { allNav, NavItem } from "./allnav";
+import { allNav, NavItem } from "./menuItems";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -16,7 +16,7 @@ const Sidebar = () => {
     setAllNav(navs);
   }, []);
 
-  const getNav = (role: String) => {
+  const getNav = (role: string) => {
     const finalNavs: NavItem[] = [];
 
     for (let i = 0; i < allNav.length; i++) {
@@ -28,9 +28,9 @@ const Sidebar = () => {
   };
   return (
     <div>
-      <div
+      {/* <div
         className={`fixed duration-200 ${"visible"} w-screen h-screen bg-[#8cbce780] top-0 left-0 z-10`}
-      ></div>
+      ></div> */}
 
       <div
         className={`w-[260px] fixed bg-[#e6e7fb] z-50 top-0 h-screen shadow-[0_0_15px_0_rgb(34_41_47_/_5%)] transition-all ${"left-0"} `}

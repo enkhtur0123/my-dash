@@ -20,10 +20,10 @@ export interface NavItem {
 export const allNav: NavItem[] = [
   {
     id: 1,
-    title: "Dashboard",
+    title: "Post",
     icon: <AiOutlineDashboard />,
     role: "admin",
-    path: "/admin/dashboard",
+    path: "/posts",
   },
   {
     id: 2,

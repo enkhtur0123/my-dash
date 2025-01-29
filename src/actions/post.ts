@@ -5,43 +5,29 @@ import prisma from "@/lib/prisma";
 
 // Create a new post
 
-export async function createPost({
-  name,
-  createdById,
-}: {
-  name: string;
-  createdById: string;
-}) {
+export async function createPost({ name }: { name: string }) {
   try {
     const post = await prisma.post.create({
       data: {
         name,
-        createdById,
       },
     });
 
     revalidatePath("/posts"); // Adjust the path based on your routing
     return { success: true, data: post };
   } catch (error) {
-    return { success: false, error: "Failed to create post" };
+    return { success: false, error: `Failed to create post: ${error}` };
   }
 }
 
 // Get all posts
 export async function getPosts() {
   try {
-    const posts = await prisma.post.findMany({
-      include: {
-        createdBy: true, // Include user data
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    const posts = await prisma.post.findMany({});
 
     return { success: true, data: posts };
   } catch (error) {
-    return { success: false, error: "Failed to fetch posts" };
+    return { success: false, error: `Failed to fetch posts: ${error}` };
   }
 }
 
@@ -50,9 +36,6 @@ export async function getPost(id: number) {
   try {
     const post = await prisma.post.findUnique({
       where: { id },
-      include: {
-        createdBy: true,
-      },
     });
 
     if (!post) {
@@ -61,7 +44,7 @@ export async function getPost(id: number) {
 
     return { success: true, data: post };
   } catch (error) {
-    return { success: false, error: "Failed to fetch post" };
+    return { success: false, error: `Failed to fetch post: ${error}` };
   }
 }
 
@@ -76,7 +59,7 @@ export async function updatePost({ id, name }: { id: number; name: string }) {
     revalidatePath("/posts");
     return { success: true, data: post };
   } catch (error) {
-    return { success: false, error: "Failed to update post" };
+    return { success: false, error: `Failed to update post: ${error}` };
   }
 }
 
@@ -90,7 +73,7 @@ export async function deletePost(id: number) {
     revalidatePath("/posts");
     return { success: true };
   } catch (error) {
-    return { success: false, error: "Failed to delete post" };
+    return { success: false, error: `Failed to delete post ${error}` };
   }
 }
 
@@ -104,13 +87,10 @@ export async function searchPosts(searchTerm: string) {
           mode: "insensitive", // Case-insensitive search
         },
       },
-      include: {
-        createdBy: true,
-      },
     });
 
     return { success: true, data: posts };
-  } catch (error) {
+  } catch {
     return { success: false, error: "Failed to search posts" };
   }
 }
