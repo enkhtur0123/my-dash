@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/header.tsx",
-    "src/components/DeleteConfirmationModel.jsx"
-, "src/app/posts/page.jsx"  ],
+    "src/components/DeleteConfirmationModel.jsx",
+    "src/app/(root)/posts/page.jsx"
+  ],
   "exclude": ["node_modules"]
 }
